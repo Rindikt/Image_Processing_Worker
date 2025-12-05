@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Processing Service</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; }
+        button { margin: 5px; padding: 10px; cursor: pointer; }
+        .control-group { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: inline-block; width: 100px; }
+        #result a { color: blue; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Асинхронная обработка изображений</h1>
+
+    <input type="file" id="fileInput" accept="image/*">
+    <hr>
+
+    <div class="control-group">
+        <h2>Простые операции</h2>
+        <button onclick="uploadFile('grayscale')">Применить Grayscale</button>
+        <button onclick="uploadFile('sepia')">Применить Sepia</button>
+    </div>
+
+    <div class="control-group">
+        <h2>Изменение размера (Resize)</h2>
+        <div class="input-group">
+            <label for="resizeWidth">Ширина (px):</label>
+            <input type="number" id="resizeWidth" value="300" min="10">
+        </div>
+        <div class="input-group">
+            <label for="resizeHeight">Высота (px):</label>
+            <input type="number" id="resizeHeight" value="200" min="10">
+        </div>
+        <button onclick="uploadFile('resize')">Изменить размер</button>
+    </div>
+
+    <div class="control-group">
+        <h2>Обрезка (Crop)</h2>
+        <p>Координаты (левый, верхний, правый, нижний)</p>
+        <div class="input-group">
+            <label for="cropLeft">Левый (x0):</label>
+            <input type="number" id="cropLeft" value="100" min="0">
+        </div>
+        <div class="input-group">
+            <label for="cropTop">Верхний (y0):</label>
+            <input type="number" id="cropTop" value="100" min="0">
+        </div>
+        <div class="input-group">
+            <label for="cropRight">Правый (x1):</label>
+            <input type="number" id="cropRight" value="400" min="0">
+        </div>
+        <div class="input-group">
+            <label for="cropBottom">Нижний (y1):</label>
+            <input type="number" id="cropBottom" value="400" min="0">
+        </div>
+        <button onclick="uploadFile('crop')">Обрезка</button>
+    </div>
+
+    <h2>Статус</h2>
+    <div id="status"></div>
+    <div id="result"></div>
+
+    <hr>
+
+    <h2>Превью</h2>
+    <div style="display: flex; gap: 20px;">
+        <div>
+            <h3>Загружаемый файл</h3>
+            <img id="inputPreview" src="" alt="Превью загружаемого файла"
+                 style="max-width: 300px; max-height: 300px; border: 1px solid #ccc;">
+        </div>
+        <div>
+            <h3>Обработанный результат</h3>
+            <img id="outputPreview" src="" alt="Результат обработки"
+                 style="max-width: 300px; max-height: 300px; border: 1px solid #ccc;">
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

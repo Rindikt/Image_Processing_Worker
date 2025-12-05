@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+celery
+redis
+python-multipart
+pillow
+pytest
+pytest-asyncio
+httpx
+mock
